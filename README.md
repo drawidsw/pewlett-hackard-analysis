@@ -58,3 +58,51 @@ After importing the CSV files into tables in a postgres database in multiple tab
 * Finally, data was aggregated and we determine the number of retiring employees by their titles. The aggregated data is shown [here](Data/retiring_titles.csv). 
 
 To answer the second question on mentiorship eligibility, another query was run (described [here](Queries/Employee_Database_challenge.sql) under the comment *deliverable 2*. A total of 1,508 records were found [here](Data/mentorship_eligibility.csv)
+
+# Further Analysis
+
+The **Silver Tsunami** looks like an impending Armageddon. It appears that ~90K employees are nearing retirement and only ~1500 are eligible for potential mentorship, not even a small fraction of impending workforce about to drop out.
+
+As seen before though, the number ~90K is not quite accurate, as we are not considering only active employees in the system. Let's modify our query and find the **active employees** that are about to retire as follows. We will run two queries to first find a total number and then, aggregate the number of employees by their titles.
+
+```
+-- Find the total number of active employees nearing retirement. (Note, this query runs on the emp_titles table created in the first deliverable)
+drop table if exists emp_distinct_titles;
+select distinct on (emp_no) emp_no,
+							first_name,
+							last_name,
+							title
+into emp_distinct_titles
+from emp_titles
+where to_date = '9999-01-01'
+order by emp_no, to_date desc;
+
+```
+
+The above query returns the number of rows as 72,458. It's much better than the original number of ~90K, but nevertheless, it's still quite a large number.
+
+Then, we will rerun the query below to aggregate numbers by titles.
+
+```
+drop table if exists emp_distinct_titles;
+select distinct on (emp_no) emp_no,
+							first_name,
+							last_name,
+							title
+into emp_distinct_titles
+from emp_titles
+where to_date = '9999-01-01'
+order by emp_no, to_date desc;
+```
+
+Now, we get the table below.
+
+|  Count | Title |
+| ------ | ----- | 
+|25,916| Senior Engineer |
+|24,926| Senior Staff |
+|9,285| Engineer |
+|7,636| Staff |
+|3,603| Technique Leader |
+|1,090| Assistant Engineer |
+|2| Manager |
