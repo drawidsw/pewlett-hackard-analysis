@@ -108,7 +108,7 @@ Now, we get the table below.
 |1,090| Assistant Engineer |
 |2| Manager |
 
-As seen from the above table, the biggest areas of concern are **senior staff** and **senior engineer** roles, where collectively, over 50K retirements are looming. Assuming the **staff** and **engineer** roles are ripe for promotions, we would like to find out just how many **current employees** with those titles are in the company, whose birth date is between 1955 and 1965 (so we are not counting staff and engineers who are about to retire). In fact, such a discovery would fix one obvious problem with the **mentorship eligibility** analysis, where a start birth date of 1965 was chosen arbitrarily. This left a big gap between 1955 and 1965 leaving all those eligible staff to be completely unaccounted for.
+As seen from the above table, the biggest areas of concern are **senior staff** and **senior engineer** roles, where collectively, over 50K retirements are looming. Assuming the **staff** and **engineer** roles are ripe for promotions, we would like to find out just how many **current employees** with those titles are in the company, whose birth date is between 1956 and 1965 (so we are not counting staff and engineers who are about to retire). In fact, such a discovery would fix one obvious problem with the **mentorship eligibility** analysis, where a start birth date of 1965 was chosen arbitrarily. This left a big gap between 1956 and 1964 leaving all those eligible staff to be completely unaccounted for.
 
 The following query would give us our answer.
 
