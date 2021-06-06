@@ -32,7 +32,7 @@ The data model can be described by the following **Entity Relationship Diagram**
 
 ## Primary and Foreign Keys for Each Table
 
-A primary key for a table uniquely identifies a row. There can never be two rows with the same primary key. A foreign key establishes a link between a value of a table to another table's value. This provides **referential integrity** in the whole system (for example, deleting or updating an employee's ID in the *employees* table would guarantee the same operation is performed in all tables linking back to the *employees* table, leaving the system in a *consistent state*).
+A primary key for a table uniquely identifies a row. There can never be two rows with the same primary key. A foreign key establishes a link between a value of a table to another table's value. This provides **referential integrity** to the whole system (for example, deleting or updating an employee's ID in the *employees* table would guarantee the same operation is performed in all tables linking back to the *employees* table, leaving the system in a *consistent state*).
 
 The following table describes primary keys of all tables.
 
