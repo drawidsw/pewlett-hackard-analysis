@@ -56,3 +56,5 @@ After importing the CSV files into tables in a postgres database in multiple tab
   * An employee appears multiple times, since an employee can have multiple titles.
 * In the next query, a **distinct** clause was used to find only one value for an employee (and their most recent title). A total of 90,399 records were found [here](Data/unique_titles.csv). We still haven't fixed the issue of finding only existing employees.
 * Finally, data was aggregated and we determine the number of retiring employees by their titles. The aggregated data is shown [here](Data/retiring_titles.csv). 
+
+To answer the second question on mentiorship eligibility, another query was run (described [here](Queries/Employee_Database_challenge.sql) under the comment *deliverable 2*. A total of 1,508 records were found [here](Data/mentorship_eligibility.csv)
