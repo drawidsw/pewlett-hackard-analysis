@@ -48,4 +48,11 @@ The following table describes primary keys of all tables.
 
 # Analysis and Results
 
-After importing the CSV files into tables in a postgres database (by establishing the proper relationships and 
+After importing the CSV files into tables in a postgres database in multiple tables and establishing a proper relationship conforming to the ERD shown above, we analyze data to answer the first question (number of employees nearing retirement) by creating three queries. The queries can be found [here](Queries/Employee_Database_challenge.sql).
+
+* In total, there are 300,024 of all employees. This includes all retired as well as active employees.
+* The first query we ran found the number of **potential employees** nearing retirement. A total of 133,776 record were found [here](Data/retirement_titles.csv). However, there are a number of issues here.
+  * We should consider only active employees, i.e. those with the **to_date** of a special value **9999-01-01**.
+  * An employee appears multiple times, since an employee can have multiple titles.
+* In the next query, a **distinct** clause was used to find only one value for an employee (and their most recent title). A total of 90,399 records were found [here](Data/unique_titles.csv). We still haven't fixed the issue of finding only existing employees.
+* Finally, data was aggregated and we determine the number of retiring employees by their titles. The aggregated data is shown [here](Data/retiring_titles.csv). 
