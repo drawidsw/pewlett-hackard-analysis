@@ -24,7 +24,7 @@ In essence, there are two *independent* entities:
 
 The first two tables describe various attributes of these independent entities. The third table ties them together by establishing a relationship (which employee belongs to which department). The fourth table describes which employees are department heads - in this case, the relationship can be viewed as *reversed* (i.e. which department is headed by which employee). The last two tables describe salaries and titles of an employee. The reason they are broken out of the employee table is because typically a **one to many** relationship exists (i.e. the same employee can have multiple titles indicating inter-department moves or career progression). Having said this, we note the **salaries table has a one to one relationship with the employees table**. This is not typical. In this case, having a separate salaries table has no functional value.
 
-The process of breaking data in this manner and establishing relationship is called **data normalization**, and it is considered to be the *rai·son d'ê·tre* of RDBMS (relational database management systems).
+The process of breaking data into different tables and establishing a relationship between them is called **data normalization**, and it is considered to be the *rai·son d'ê·tre* of RDBMS (relational database management systems).
 
 The data model can be described by the following **Entity Relationship Diagram** (abbreviated as ERD). As seen there, the departments and employee tables provide **dept_no** and **emp_no** as the primary keys. They also act as *source of truths* for the other tables, which reference those numbers by establishing a foreign relationship with the aforementioned two tables.
 
