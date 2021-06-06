@@ -69,14 +69,14 @@ As seen before though, the number ~90K is not quite accurate, as we are not cons
 -- Find the total number of active employees nearing retirement. (Note, this query runs on the emp_titles table created in the first deliverable)
 drop table if exists emp_distinct_titles;
 select distinct on (emp_no) emp_no,
-							first_name,
-							last_name,
-							title
+			    first_name,
+			    last_name,
+			    title
 into emp_distinct_titles
 from emp_titles
 where to_date = '9999-01-01'
 order by emp_no, to_date desc;
-
+select * from emp_distinct_titles;
 ```
 
 The above query returns the number of rows as 72,458. It's much better than the original number of ~90K, but nevertheless, it's still quite a large number.
@@ -86,13 +86,14 @@ Then, we will rerun the query below to aggregate numbers by titles.
 ```
 drop table if exists emp_distinct_titles;
 select distinct on (emp_no) emp_no,
-							first_name,
-							last_name,
-							title
+		            first_name,
+			    last_name,
+			    title
 into emp_distinct_titles
 from emp_titles
 where to_date = '9999-01-01'
 order by emp_no, to_date desc;
+select * from emp_distinct_titles;
 ```
 
 Now, we get the table below.
@@ -106,3 +107,30 @@ Now, we get the table below.
 |3,603| Technique Leader |
 |1,090| Assistant Engineer |
 |2| Manager |
+
+As seen from the above table, the biggest areas of concern are **senior staff** and **senior engineer** roles, where collectively, over 50K retirements are looming. Assuming the **staff** and **engineer** roles are ripe for promotions, we would like to find out just how many **current employees** with those titles are in the company, whose birth date is between 1955 and 1965 (so we are not counting staff and engineers who are about to retire). In fact, such a discovery would fix one obvious problem with the **mentorship eligibility** analysis, where a start birth date of 1965 was chosen arbitrarily. This left a big gap between 1955 and 1965 leaving all those eligible staff to be completely unaccounted for.
+
+The following query would give us our answer.
+
+```
+drop table if exists emp_titles;
+select em.emp_no, 
+	   em.first_name, 
+	   em.last_name,
+	   ti.title,
+	   ti.from_date,
+	   ti.to_date
+into emp_titles
+from employees as em
+left join titles as ti
+on em.emp_no = ti.emp_no
+where (ti.to_date = '9999-01-01') and
+      (em.birth_date between '1956-01-01' and '1965-12-31') and
+      (ti.title = 'Staff' or ti.title = 'Engineer')
+order by em.emp_no;
+select * from emp_titles;
+```
+
+This query returns 39,588 rows. It's much better now. Almost ~40K staff and engineers are ready to be promoted to take the senior staff and engineers who are about to retire. It still leaves a hole of ~10K positions at the senior levels, and the organization would have to fill the ~40K staff/engineer roles who are about to be promoted.
+
+Further analysis could be done to determine the shortfalls for each department at every title.
