@@ -32,3 +32,21 @@ from emp_distinct_titles
 group by title
 order by count(emp_no) desc;
 
+-- Deliverable 2: first and only query
+drop table if exists mentorship_eligibility;
+select distinct on (em.emp_no) em.emp_no,
+                               em.first_name,
+	                           em.last_name,
+	                           em.birth_date,
+	                           de.from_date,
+	                           de.to_date,
+	                           ti.title
+into mentorship_eligibility
+from employees as em
+left join dept_emp as de
+on em.emp_no = de.emp_no
+left join titles as ti
+on em.emp_no = ti.emp_no
+where (de.to_date = '9999-01-01') and
+       (em.birth_date between '1965-01-01' and '1965-12-31')
+order by em.emp_no;
